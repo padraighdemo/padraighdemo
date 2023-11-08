@@ -1,0 +1,34 @@
+name: CI2
+
+on:
+ 
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    
+      - uses: actions/checkout@v3
+      
+      - name: Retrieve secrets from Keeper
+        id: ksecrets
+        uses: Keeper-Security/ksm-action@master
+        with:
+          keeper-secret-config: ${{ secrets.KSM_CONFIG }}
+          secrets: |
+              U1C43xoMgeZLLGzTcBjFbQ/field/password > env:PASSWORD
+              U1C43xoMgeZLLGzTcBjFbQ/field/login > LOGIN
+
+      - name: Print Windows username/password
+        run: |
+          echo "Your Windows password is ${{ env.PASSWORD }}"
+          echo "Your Windows username is ${{ steps.ksecrets.outputs.LOGIN }}"
