@@ -23,7 +23,7 @@ jobs:
         id: ksecrets
         uses: Keeper-Security/ksm-action@master
         with:
-          keeper-secret-config: ${{ secrets.DEMO_SECRETS }}
+          keeper-secret-config: ${{ secrets.DEMO_SECRET }}
           secrets: |
               U1C43xoMgeZLLGzTcBjFbQ/field/password > env:PASSWORD
               U1C43xoMgeZLLGzTcBjFbQ/field/login > LOGIN
